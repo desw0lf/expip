@@ -1,9 +1,9 @@
 import express from "express";
-import { ips } from "./ips.js";
+// import { ips } from "./ips.js";
 const app = express();
 const port = process.env.PORT || 1701;
 
-app.set("trust proxy", ["loopback", ...ips]);
+app.set("trust proxy");
 
 function circularReplacer() {
   const seen = new WeakSet(); // object
@@ -22,7 +22,8 @@ app.get("/", (req, res) => {
   const ok = {
     a: req.ip,
     b: req.headers["x-forwarded-for"],
-    c: req.headers["cf-connecting-ip"]
+    c: req.headers["cf-connecting-ip"],
+    d: req.headers["x-real-ip"],
   };
   console.log(ok);
   res.json(ok);
