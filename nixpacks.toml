@@ -1,0 +1,6 @@
+[phases.setup]
+nixPkgs = ['nodejs_23']
+nixpkgsArchive = 'nixos-24.11'
+
+[variables]
+NIXPACKS_NODE_VERSION = '23'
