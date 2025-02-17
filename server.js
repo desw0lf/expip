@@ -1,8 +1,9 @@
 import express from "express";
+import { ips } from "./ips.js";
 const app = express();
 const port = process.env.PORT || 1701;
 
-app.set("trust proxy", ["loopback"]);
+app.set("trust proxy", ["loopback", ...ips]);
 
 function circularReplacer() {
   const seen = new WeakSet(); // object
