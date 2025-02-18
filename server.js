@@ -3,9 +3,12 @@ import express from "express";
 const app = express();
 const port = process.env.PORT || 1701;
 
-app.set("trust proxy", (ip) => {
-  console.log({ ip });
-  return false;
+const list = [];
+
+app.set("trust proxy", 5);
+
+app.get("/list", (req, res) => {
+  res.json({ list });
 });
 
 function circularReplacer() {
@@ -34,6 +37,8 @@ app.get("/", (req, res) => {
     b: req.headers["x-forwarded-for"],
     c: req.headers["cf-connecting-ip"],
     d: req.headers["x-real-ip"],
+    e: req.socket.remoteAddress,
+    f: req.ips,
   };
   console.log(ok);
   res.json(ok);
