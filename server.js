@@ -3,7 +3,7 @@ import express from "express";
 const app = express();
 const port = process.env.PORT || 1701;
 
-app.set("trust proxy", 3);
+app.set("trust proxy", 4);
 
 function circularReplacer() {
   const seen = new WeakSet(); // object
