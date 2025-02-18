@@ -5,7 +5,9 @@ const port = process.env.PORT || 1701;
 
 const list = [];
 
-app.set("trust proxy", 5);
+if (process.env.TRUST_PROXY) {
+  app.set("trust proxy", parseInt(process.env.TRUST_PROXY, 10));
+}
 
 app.get("/list", (req, res) => {
   res.json({ list });
