@@ -3,7 +3,7 @@ import express from "express";
 const app = express();
 const port = process.env.PORT || 1701;
 
-app.set("trust proxy");
+app.set("trust proxy", 3);
 
 function circularReplacer() {
   const seen = new WeakSet(); // object
@@ -20,9 +20,9 @@ function circularReplacer() {
 
 
 app.get("/hm", (req, res) => {
-  const pr = req.query.pr;
+  const pr = parseInt(req.query.pr, 10);
   app.set("trust proxy", pr);
-  res.json(pr);
+  res.json({ pr });
 });
 
 app.get("/", (req, res) => {
