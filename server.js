@@ -7,7 +7,7 @@ app.set("trust proxy");
 
 function circularReplacer() {
   const seen = new WeakSet(); // object
-  return (key, value) => {
+  return (_key, value) => {
     if (typeof value === "object" && value !== null) {
       if (seen.has(value)) {
         return;
@@ -17,6 +17,13 @@ function circularReplacer() {
     return value;
   };
 }
+
+
+app.get("/hm", (req, res) => {
+  const pr = req.query.pr;
+  app.set("trust proxy", pr);
+  res.json(pr);
+});
 
 app.get("/", (req, res) => {
   const ok = {
